@@ -388,7 +388,10 @@ boost_library(
         ":system",
         ":throw_exception",
         ":type_traits",
-    ],
+    ] + select(
+        {":windows_x86_64": [":winapi"],
+     "//conditions:default": [
+        ] })
 )
 
 boost_library(
