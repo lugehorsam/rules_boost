@@ -1564,7 +1564,10 @@ boost_library(
         ":noncopyable",
         ":predef",
         ":utility",
-    ],
+    ] + select(
+        {":windows_x86_64": [":winapi"],
+     "//conditions:default": [
+        ] }),
 )
 
 boost_library(
