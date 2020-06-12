@@ -16,6 +16,11 @@ _w_no_unused_value = select({
 })
 
 config_setting(
+    name = "android",
+    values = {"crosstool_top": "@androidndk//:default_crosstool"},
+)
+
+config_setting(
     name = "linux",
     constraint_values = [
         "@bazel_tools//platforms:linux",
@@ -211,6 +216,9 @@ boost_library(
     }),
     exclude_src = ["libs/fiber/src/numa/**/*.cpp"],
     linkopts = select({
+        "android": [
+
+        ],
         ":linux": [
             "-lpthread",
         ],
@@ -351,7 +359,18 @@ boost_library(
         ],
         "//conditions:default": [],
     }),
-    linkopts = ["-lpthread"],
+
+    linkopts = select({
+        "android": [
+        ],
+        ":linux": [
+            "-lpthread",
+        ],
+        ":osx_x86_64": [
+            "-lpthread",
+        ],
+        ":windows_x86_64": [],
+    }),
     deps = [
         ":bind",
         ":date_time",
@@ -1759,6 +1778,9 @@ boost_library(
         "//conditions:default": [],
     }),
     linkopts = select({
+        "android": [
+
+        ],
         ":linux": [
             "-lpthread",
         ],
