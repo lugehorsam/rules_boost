@@ -11,7 +11,7 @@ _w_no_deprecated = selects.with_or({
 
 config_setting(
     name = "android",
-    values = {"crosstool_top": "@androidndk//:default_crosstool"},
+    values = {"crosstool_top": "@androidndk//:toolchain-libcpp"},
 )
 
 config_setting(
