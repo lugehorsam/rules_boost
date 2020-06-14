@@ -367,7 +367,10 @@ boost_library(
         ":osx_x86_64": [
             "-lpthread",
         ],
-        ":windows_x86_64": [],
+        ":windows_x86_64": [
+            "-lwsock32",
+            "-lws2_32"
+        ],
     }),
     deps = [
         ":bind",
